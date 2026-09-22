@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart — Direct Marketplace</title>
+    <meta name="description" content="Review your selections and complete your purchase — direct from the artist.">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Direct Marketplace</a>
+        <nav class="main-nav">
+            <a href="jewelry.html">Jewelry</a>
+            <a href="pottery.html">Pottery</a>
+            <a href="rugs.html">Rugs &amp; Weaving</a>
+            <a href="cart.html" class="cart-link">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </div>
+</header>
+
+<!-- CART -->
+<div class="cart-page">
+    <h1>Your Cart</h1>
+
+    <div class="cart-items" id="cart-items">
+        <!-- cart line items get injected here by JS -->
+        <p class="cart-empty" id="cart-empty-msg">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-summary">
+        <p class="cart-total">Total: <span id="cart-total">$0.00</span></p>
+        <button class="checkout-btn" id="checkout-btn">Checkout</button>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <p>&copy; 2026 Direct Marketplace</p>
+</footer>
+
+<script src="/js/main.js" defer></script>
+
+</body>
+</html>

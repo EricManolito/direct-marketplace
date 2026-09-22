@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weaving & Rugs — Direct Marketplace</title>
+    <meta name="description" content="Handwoven Native rugs and textiles, direct from the artist — full fair value, no middleman markup.">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title" content="Weaving & Rugs — Direct Marketplace">
+    <meta property="og:description" content="Handwoven Native rugs and textiles, direct from the artist.">
+    <meta property="og:image" content="/assets/og-rugs.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Direct Marketplace</a>
+        <nav class="main-nav">
+            <a href="jewelry.html">Jewelry</a>
+            <a href="pottery.html">Pottery</a>
+            <a href="rugs.html">Rugs &amp; Weaving</a>
+            <a href="cart.html" class="cart-link">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="hero-slider">
+    <img src="https://placehold.co/1200x500/3a2e26/fdfaf5?text=Rugs+1" class="slide active" alt="Rug piece 1">
+    <img src="https://placehold.co/1200x500/6b3e10/fdfaf5?text=Rugs+2" class="slide" alt="Rug piece 2">
+    <img src="https://placehold.co/1200x500/944f16/fdfaf5?text=Rugs+3" class="slide" alt="Rug piece 3">
+</div>
+
+<!-- ARTIST LIST -->
+<div class="artist-list">
+    <h1>Weaving &amp; Rugs Artists</h1>
+
+    <div class="artist-row" data-artist-id="artist-1">
+        <img src="https://placehold.co/80x80/3a2e26/fdfaf5?text=MM" alt="Mary Manuelito">
+        <span class="artist-name">Mary Manuelito</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-2">
+        <img src="https://placehold.co/80x80/6b3e10/fdfaf5?text=LB" alt="Leona Barbone">
+        <span class="artist-name">Leona Barbone</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-3">
+        <img src="https://placehold.co/80x80/b5651d/fdfaf5?text=AT" alt="Alice Tsosie">
+        <span class="artist-name">Alice Tsosie</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-4">
+        <img src="https://placehold.co/80x80/944f16/fdfaf5?text=JD" alt="Jennifer Denetdal">
+        <span class="artist-name">Jennifer Denetdal</span>
+    </div>
+
+</div>
+
+<!-- ARTIST DETAIL OVERLAY -->
+<div class="artist-overlay" id="artist-overlay">
+    <div class="overlay-content">
+        <button class="overlay-close" id="overlay-close">&times;</button>
+
+        <div class="artist-bio">
+            <img id="overlay-artist-img" src="" alt="">
+            <h2 id="overlay-artist-name"></h2>
+            <p id="overlay-artist-bio"></p>
+        </div>
+
+        <div class="artist-products" id="overlay-products">
+            <!-- product cards get injected here by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <p>&copy; 2026 Direct Marketplace</p>
+</footer>
+
+<script src="/js/main.js" defer></script>
+
+</body>
+</html>

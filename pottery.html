@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pottery — Direct Marketplace</title>
+    <meta name="description" content="Handcrafted Native pottery, direct from the artist — full fair value, no middleman markup.">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title" content="Pottery — Direct Marketplace">
+    <meta property="og:description" content="Handcrafted Native pottery, direct from the artist.">
+    <meta property="og:image" content="/assets/og-pottery.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pottery — Direct Marketplace</title>
+    <meta name="description" content="Handcrafted Native pottery, direct from the artist — full fair value, no middleman markup.">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title" content="Pottery — Direct Marketplace">
+    <meta property="og:description" content="Handcrafted Native pottery, direct from the artist.">
+    <meta property="og:image" content="/assets/og-pottery.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Direct Marketplace</a>
+        <nav class="main-nav">
+            <a href="jewelry.html">Jewelry</a>
+            <a href="pottery.html">Pottery</a>
+            <a href="rugs.html">Rugs &amp; Weaving</a>
+            <a href="cart.html" class="cart-link">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="hero-slider">
+    <img src="https://placehold.co/1200x500/2f5c58/fdfaf5?text=Pottery+1" class="slide active" alt="Pottery piece 1">
+    <img src="https://placehold.co/1200x500/1e433f/fdfaf5?text=Pottery+2" class="slide" alt="Pottery piece 2">
+    <img src="https://placehold.co/1200x500/143530/fdfaf5?text=Pottery+3" class="slide" alt="Pottery piece 3">
+</div>
+
+<!-- ARTIST LIST -->
+<div class="artist-list">
+    <h1>Pottery Artists</h1>
+
+    <div class="artist-row" data-artist-id="artist-1">
+        <img src="https://placehold.co/80x80/2f5c58/fdfaf5?text=MD" alt="Maddie Deshnod">
+        <span class="artist-name">Maddie Deshnod</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-2">
+        <img src="https://placehold.co/80x80/1e433f/fdfaf5?text=AP" alt="Abe Potts">
+        <span class="artist-name">Abe Potts</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-3">
+        <img src="https://placehold.co/80x80/3a2e26/fdfaf5?text=ST" alt="Samantha Tillwater">
+        <span class="artist-name">Samantha Tillwater</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-4">
+        <img src="https://placehold.co/80x80/944f16/fdfaf5?text=ES" alt="Edgar Shallow">
+        <span class="artist-name">Edgar Shallow</span>
+    </div>
+
+</div>
+
+<!-- ARTIST DETAIL OVERLAY -->
+<div class="artist-overlay" id="artist-overlay">
+    <div class="overlay-content">
+        <button class="overlay-close" id="overlay-close">&times;</button>
+
+        <div class="artist-bio">
+            <img id="overlay-artist-img" src="" alt="">
+            <h2 id="overlay-artist-name"></h2>
+            <p id="overlay-artist-bio"></p>
+        </div>
+
+        <div class="artist-products" id="overlay-products">
+            <!-- product cards get injected here by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <p>&copy; 2026 Direct Marketplace</p>
+</footer>
+
+<script src="/js/main.js" defer></script>
+
+</body>
+</html>

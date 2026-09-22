@@ -1,0 +1,251 @@
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Your Font Here', sans-serif;
+    color: #2b2420;
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===== NAV ===== */
+.site-header {
+    background-color: #f5efe6; /* light sand */
+    padding: 1rem 2rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.main-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.main-nav a {
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.main-nav a:hover {
+    opacity: 0.6;
+}
+
+/* ===== HERO ===== */
+.hero {
+    position: relative;
+    background-color: #3a2e26; /* dark clay */
+    min-height: 60vh;
+}
+
+.hero-image {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    color: #fdfaf5;
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-cta {
+    display: inline-block;
+    background-color: #b5651d; /* clay/rust accent */
+    color: #fdfaf5;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.hero-cta:hover {
+    background-color: #944f16;
+}
+
+/* ===== MISSION ===== */
+.mission {
+    background-color: #fdfaf5; /* light neutral */
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.mission p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #4a4038;
+}
+
+/* ===== FEATURED PRODUCT ===== */
+.featured-product {
+    background-color: #2f5c58; /* turquoise/teal accent */
+    color: #fdfaf5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featured-product img {
+    flex: 1 1 300px;
+    border-radius: 6px;
+}
+
+.featured-info {
+    flex: 1 1 300px;
+}
+
+.featured-info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.artist-name {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart {
+    background-color: #fdfaf5;
+    color: #2f5c58;
+    border: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.03);
+}
+
+/* ===== CATEGORY GRID ===== */
+.category-grid {
+    background-color: #fdfaf5;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.category-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.category-card h2 {
+    padding: 1rem;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background-color: #3a2e26;
+    color: #fdfaf5;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        left: 5%;
+        right: 5%;
+        max-width: none;
+    }
+}
+
+/* ===== HERO SLIDER ===== */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+}
+
+.hero-slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slider .slide.active {
+    opacity: 1;
+}

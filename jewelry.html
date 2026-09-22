@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry — Direct Marketplace</title>
+    <meta name="description" content="Handmade Native jewelry, direct from the artist — full fair value, no middleman markup.">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=..." rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title" content="Jewelry — Direct Marketplace">
+    <meta property="og:description" content="Handmade Native jewelry, direct from the artist.">
+    <meta property="og:image" content="/assets/og-jewelry.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body>
+
+<!-- NAV (same as index, reused across all pages) -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Direct Marketplace</a>
+        <nav class="main-nav">
+            <a href="jewelry.html">Jewelry</a>
+            <a href="pottery.html">Pottery</a>
+            <a href="rugs.html">Rugs &amp; Weaving</a>
+            <a href="cart.html" class="cart-link">Cart <span id="cart-count">0</span></a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="hero-slider">
+    <img src="https://placehold.co/1200x500/b5651d/fdfaf5?text=Jewelry+1" class="slide active" alt="Jewelry piece 1">
+    <img src="https://placehold.co/1200x500/944f16/fdfaf5?text=Jewelry+2" class="slide" alt="Jewelry piece 2">
+    <img src="https://placehold.co/1200x500/6b3e10/fdfaf5?text=Jewelry+3" class="slide" alt="Jewelry piece 3">
+</div>
+
+<!-- ARTIST LIST -->
+<div class="artist-list">
+    <h1>Jewelry Artists</h1>
+
+    <div class="artist-row" data-artist-id="artist-1">
+        <img src="https://placehold.co/80x80/b5651d/fdfaf5?text=MT" alt="Maria Tsosie">
+        <span class="artist-name">Maria Tsosie</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-2">
+        <img src="https://placehold.co/80x80/2f5c58/fdfaf5?text=JB" alt="Jonah Begay">
+        <span class="artist-name">Jonah Begay</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-3">
+        <img src="https://placehold.co/80x80/3a2e26/fdfaf5?text=WC" alt="Waddie Crazyhorse">
+        <span class="artist-name">Waddie Crazyhorse</span>
+    </div>
+
+    <div class="artist-row" data-artist-id="artist-4">
+        <img src="https://placehold.co/80x80/944f16/fdfaf5?text=CA" alt="Catthew Analla">
+        <span class="artist-name">Catthew Analla</span>
+    </div>
+    <!-- more artist rows... -->
+</div>
+
+<!-- ARTIST DETAIL OVERLAY (hidden by default, JS shows/hides) -->
+<div class="artist-overlay" id="artist-overlay">
+    <div class="overlay-content">
+        <button class="overlay-close" id="overlay-close">&times;</button>
+
+        <div class="artist-bio">
+            <img id="overlay-artist-img" src="" alt="">
+            <h2 id="overlay-artist-name"></h2>
+            <p id="overlay-artist-bio"></p>
+        </div>
+
+        <div class="artist-products" id="overlay-products">
+            <!-- product cards get injected here by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <p>&copy; 2026 Direct Marketplace</p>
+</footer>
+
+<script src="/js/main.js" defer></script>
+
+</body>
