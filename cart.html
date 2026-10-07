@@ -29,20 +29,20 @@
 </header>
 
 <!-- CART -->
-<div class="cart-page">
+<main class="cart-page">
     <h1>Your Cart</h1>
+    <p class="cart-empty" id="cart-empty-msg">Your cart is empty.</p>
 
     <div class="cart-items" id="cart-items">
         <!-- cart line items get injected here by JS -->
-        <p class="cart-empty" id="cart-empty-msg">Your cart is empty.</p>
     </div>
 
     <div class="cart-summary">
+        <p class="cart-savings" id="cart-savings"></p>
         <p class="cart-total">Total: <span id="cart-total">$0.00</span></p>
-        <button class="checkout-btn" id="checkout-btn">Checkout</button>
+        <button type="button" class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
     </div>
-</div>
-
+</main>
 <!-- FOOTER -->
 <footer class="site-footer">
     <p>&copy; 2026 Direct Marketplace</p>

@@ -314,7 +314,7 @@ function buildProductCard(product, [bg, fg]) {
     btn.dataset.productId = product.id;
     btn.textContent = 'Add to Cart';
     btn.addEventListener('click', () => {
-        addToCart(product);
+        addToCart(product, img.src);
         btn.textContent = 'Added ✓';
         setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
     });
@@ -327,7 +327,147 @@ function formatPrice(n) {
     return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 }
 
-// Placeholder until the localStorage cart is built (next step)
-function addToCart(product) {
-    console.log('Added to cart:', product);
+// ===== CART (localStorage) =====
+const CART_KEY = 'dm-cart';
+
+function getCart() {
+    try {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+        return []; // corrupted data shouldn't break the site
+    }
 }
+
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartCount();
+}
+
+function addToCart(product, image) {
+    const cart = getCart();
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            dealerPrice: product.dealerPrice,
+            image,
+            qty: 1
+        });
+    }
+    saveCart(cart);
+}
+
+function changeQty(id, delta) {
+    let cart = getCart();
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    saveCart(cart);
+    renderCart();
+}
+
+function removeFromCart(id) {
+    saveCart(getCart().filter(i => i.id !== id));
+    renderCart();
+}
+
+function updateCartCount() {
+    const el = document.getElementById('cart-count');
+    if (el) el.textContent = getCart().reduce((sum, i) => sum + i.qty, 0);
+}
+
+// ===== CART PAGE =====
+function renderCart() {
+    const list = document.getElementById('cart-items');
+    if (!list) return; // not on cart.html
+
+    const cart = getCart();
+    list.replaceChildren(...cart.map(buildCartRow));
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const dealerTotal = cart.reduce((s, i) => s + i.dealerPrice * i.qty, 0);
+
+    document.getElementById('cart-empty-msg').hidden = cart.length > 0;
+    document.getElementById('cart-total').textContent = formatPrice(total);
+    document.getElementById('checkout-btn').disabled = cart.length === 0;
+
+    const savings = document.getElementById('cart-savings');
+    if (savings) {
+        savings.textContent = cart.length
+            ? `At dealer prices this would be ${formatPrice(dealerTotal)}. ${formatPrice(dealerTotal - total)} stays with the artists.`
+            : '';
+    }
+}
+
+function buildCartRow(item) {
+    const row = document.createElement('div');
+    row.className = 'cart-row card';
+
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = item.name;
+
+    const name = document.createElement('span');
+    name.className = 'cart-name';
+    name.textContent = item.name;
+
+    const qty = document.createElement('div');
+    qty.className = 'cart-qty';
+    const count = document.createElement('span');
+    count.textContent = item.qty;
+    qty.append(
+        makeButton('−', `Decrease quantity of ${item.name}`, () => changeQty(item.id, -1)),
+        count,
+        makeButton('+', `Increase quantity of ${item.name}`, () => changeQty(item.id, 1))
+    );
+
+    const lineTotal = document.createElement('span');
+    lineTotal.className = 'cart-line-total';
+    lineTotal.textContent = formatPrice(item.price * item.qty);
+
+    const remove = makeButton('Remove', `Remove ${item.name} from cart`, () => removeFromCart(item.id));
+    remove.classList.add('cart-remove');
+
+    row.append(img, name, qty, lineTotal, remove);
+    return row;
+}
+
+function makeButton(text, label, onClick) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = text;
+    btn.setAttribute('aria-label', label);
+    btn.addEventListener('click', onClick);
+    return btn;
+}
+
+function initCheckout() {
+    const btn = document.getElementById('checkout-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        // Later: POST getCart() to /api/orders on the Express backend
+        localStorage.removeItem(CART_KEY);
+        updateCartCount();
+        renderCart();
+        document.getElementById('cart-empty-msg').textContent =
+            'Thank you! Your order has been placed (demo — no payment taken).';
+    });
+}
+
+// ===== INIT =====
+updateCartCount();
+renderCart();
+initCheckout();
+
+// Keep the count in sync if the cart changes in another tab
+window.addEventListener('storage', e => {
+    if (e.key === CART_KEY) {
+        updateCartCount();
+        renderCart();
+    }
+});

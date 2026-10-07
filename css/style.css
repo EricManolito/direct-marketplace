@@ -462,3 +462,39 @@ body.overlay-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
     .artist-overlay, .overlay-content { transition: none; }
 }
+.cart-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+.cart-row img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.cart-qty button {
+    width: 2rem;
+    height: 2rem;
+}
+.cart-line-total {
+    font-weight: 600;
+    min-width: 5rem;
+    text-align: right;
+}
+.cart-savings {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+@media (max-width: 600px) {
+    .cart-row { grid-template-columns: 64px 1fr; }
+    .cart-qty, .cart-line-total, .cart-remove { grid-column: 2; justify-self: start; }
+}
