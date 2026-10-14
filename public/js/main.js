@@ -449,13 +449,40 @@ function makeButton(text, label, onClick) {
 function initCheckout() {
     const btn = document.getElementById('checkout-btn');
     if (!btn) return;
-    btn.addEventListener('click', () => {
-        // Later: POST getCart() to /api/orders on the Express backend
-        localStorage.removeItem(CART_KEY);
-        updateCartCount();
-        renderCart();
-        document.getElementById('cart-empty-msg').textContent =
-            'Thank you! Your order has been placed (demo — no payment taken).';
+
+    btn.addEventListener('click', async () => {
+        const msg = document.getElementById('cart-empty-msg');
+
+        // Send only what the server needs, not images or dealer prices
+        const items = getCart().map(({ id, name, price, qty }) => ({ id, name, price, qty }));
+
+        btn.disabled = true;           // stops double-clicks from placing two orders
+        btn.textContent = 'Placing order…';
+
+        try {
+            const res = await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items })
+            });
+
+            if (!res.ok) throw new Error(`Server responded ${res.status}`);
+
+            const order = await res.json();
+
+            // Only clear the cart once the server confirms it saved
+            localStorage.removeItem(CART_KEY);
+            updateCartCount();
+            renderCart();
+            msg.textContent =
+                `Thank you! Order #${order.orderId} placed — ${formatPrice(order.total)} goes to the artists (demo — no payment taken).`;
+        } catch (err) {
+            console.error(err);
+            btn.disabled = false;
+            alert('Sorry, your order could not be placed. Your cart has been kept. Please try again.');
+        } finally {
+            btn.textContent = 'Checkout';
+        }
     });
 }
 
