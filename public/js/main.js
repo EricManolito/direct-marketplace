@@ -459,10 +459,30 @@ function initCheckout() {
     });
 }
 
+// ===== FEATURED PRODUCT (home page) =====
+const FEATURED_PRODUCT = {
+    id: 'featured-1',
+    name: 'Featured Turquoise Cuff',
+    price: 185,
+    dealerPrice: 1080
+};
+
+function initFeaturedProduct() {
+    const btn = document.querySelector('.featured-product .add-to-cart');
+    if (!btn) return; // not on the home page
+
+    btn.addEventListener('click', () => {
+        const img = document.querySelector('.featured-product img');
+        addToCart(FEATURED_PRODUCT, img ? img.src : '');
+        btn.textContent = 'Added ✓';
+        setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
+    });
+}
 // ===== INIT =====
 updateCartCount();
 renderCart();
 initCheckout();
+initFeaturedProduct();
 
 // Keep the count in sync if the cart changes in another tab
 window.addEventListener('storage', e => {
