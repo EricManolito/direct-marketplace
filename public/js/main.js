@@ -452,34 +452,48 @@ function initCheckout() {
 
     btn.addEventListener('click', async () => {
         const msg = document.getElementById('cart-empty-msg');
+        const nameInput = document.getElementById('customer-name');
+        const emailInput = document.getElementById('customer-email');
 
-        // Send only what the server needs, not images or dealer prices
-        const items = getCart().map(({ id, name, price, qty }) => ({ id, name, price, qty }));
+        // Let the browser show its own "please fill this in" bubbles first
+        if (!nameInput.reportValidity() || !emailInput.reportValidity()) return;
 
-        btn.disabled = true;           // stops double-clicks from placing two orders
+        const customer = { name: nameInput.value.trim(), email: emailInput.value.trim() };
+
+        // Only ids and quantities. The server sets the prices.
+        const items = getCart().map(({ id, qty }) => ({ id, qty }));
+
+        btn.disabled = true;
         btn.textContent = 'Placing order…';
 
         try {
             const res = await fetch('/api/orders', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items })
+                body: JSON.stringify({ customer, items })
             });
 
-            if (!res.ok) throw new Error(`Server responded ${res.status}`);
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                const err = new Error(`Server responded ${res.status}`);
+                err.serverMessage = data.error;
+                throw err;
+            }
 
             const order = await res.json();
 
-            // Only clear the cart once the server confirms it saved
             localStorage.removeItem(CART_KEY);
             updateCartCount();
             renderCart();
+            nameInput.value = '';
+            emailInput.value = '';
             msg.textContent =
-                `Thank you! Order #${order.orderId} placed — ${formatPrice(order.total)} goes to the artists (demo — no payment taken).`;
+                `Thank you, ${customer.name}! Order #${order.orderId} placed — ${formatPrice(order.total)} goes to the artists (demo — no payment taken).`;
         } catch (err) {
             console.error(err);
             btn.disabled = false;
-            alert('Sorry, your order could not be placed. Your cart has been kept. Please try again.');
+            alert(err.serverMessage ||
+                'Sorry, your order could not be placed. Your cart has been kept. Please try again.');
         } finally {
             btn.textContent = 'Checkout';
         }

@@ -37,6 +37,14 @@
         <!-- cart line items get injected here by JS -->
     </div>
 
+    <div class="checkout-details">
+        <label for="customer-name">Name</label>
+        <input type="text" id="customer-name" autocomplete="name" maxlength="100" required>
+
+        <label for="customer-email">Email</label>
+        <input type="email" id="customer-email" autocomplete="email" maxlength="254" required>
+    </div>
+
     <div class="cart-summary">
         <p class="cart-savings" id="cart-savings"></p>
         <p class="cart-total">Total: <span id="cart-total">$0.00</span></p>
