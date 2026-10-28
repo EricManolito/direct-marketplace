@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const Database = require('better-sqlite3');
-const products = require('./products.json');
+const catalog = require('./catalog.json');
 
 const app = express();
 const PORT = 3000;
@@ -38,10 +38,28 @@ db.exec(`
   );
 `);
 
-// --- Load products.json into the products table on every startup ---
-// Edit products.json and restart the server to change names or prices.
+// --- Load catalog.json into the products table on every startup ---
+// catalog.json is the one place names, bios and prices live.
+// Edit it and restart the server to change anything.
 // order_items keeps its own copy of name and price, so past orders
 // still show what the customer actually paid.
+
+// Flatten the nested catalog into one list of products
+const products = [
+  catalog.featured,
+  ...Object.entries(catalog.categories).flatMap(([category, { artists }]) =>
+    Object.values(artists).flatMap((artist) =>
+      artist.products.map((p) => ({ ...p, category, artist: artist.name }))
+    )
+  ),
+];
+
+// Catch copy-paste mistakes: two products with the same id
+const seenIds = new Set();
+for (const p of products) {
+  if (seenIds.has(p.id)) throw new Error(`Duplicate product id in catalog.json: ${p.id}`);
+  seenIds.add(p.id);
+}
 const upsertProduct = db.prepare(`
   INSERT INTO products (id, name, category, artist, price, dealer_price)
   VALUES (@id, @name, @category, @artist, @price, @dealerPrice)
@@ -80,6 +98,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Routes ---
+
+// Everything the pages need to display: artists, bios, products, prices
+app.get('/api/catalog', (req, res) => {
+  res.json(catalog);
+});
+
 app.post('/api/orders', (req, res) => {
   const { items, customer } = req.body ?? {};
 
